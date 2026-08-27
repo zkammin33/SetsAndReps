@@ -1,12 +1,15 @@
-const CACHE = 'lift-v3';
+const CACHE = 'lift-v4';
 const FILES = [
   './',
   './index.html',
+  './workouts.html',
+  './exercises.html',
   './log.html',
   './backup.html',
   './manifest.json',
   './css/styles.css',
   './js/app.js',
+  './js/exercises.js',
 ];
 
 self.addEventListener('install', e => {
@@ -24,5 +27,8 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
+  // ignoreSearch: ./log.html?w=<id> must still hit the cached ./log.html offline.
+  e.respondWith(
+    caches.match(e.request, { ignoreSearch: true }).then(r => r || fetch(e.request))
+  );
 });

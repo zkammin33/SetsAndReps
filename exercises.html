@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0e0e0e">
-<title>GET SWOLE</title>
+<title>Exercises — GET SWOLE</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icons/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,40 +17,39 @@
 <nav>
   <a href="./" class="nav-brand">GET SWOLE</a>
   <div class="nav-links">
-    <a href="./" class="active">History</a>
+    <a href="./">History</a>
     <a href="./log.html">Log</a>
     <a href="./workouts.html">Workouts</a>
-    <a href="./exercises.html">Exercises</a>
+    <a href="./exercises.html" class="active">Exercises</a>
     <a href="./backup.html">Backup</a>
   </div>
 </nav>
 
 <main>
   <div class="page-header">
-    <h1>GET <span>SWOLE</span></h1>
-    <a href="./log.html" class="btn btn-primary">+ Log Set</a>
+    <h1>EXERCISE <span>LIBRARY</span></h1>
   </div>
 
-  <section id="history">
-    <h2>History</h2>
-    <div class="card">
-      <table class="sets-table">
-        <thead>
-          <tr>
-            <th>Exercise</th>
-            <th>Load</th>
-            <th>When</th>
-          </tr>
-        </thead>
-        <tbody id="history-body"></tbody>
-      </table>
-      <div id="history-empty" class="empty" hidden>
-        <p>No sets logged yet. Go lift something.</p>
-      </div>
+  <section class="card">
+    <div class="form-group">
+      <label for="ex-search">Search</label>
+      <input id="ex-search" placeholder="Leg press" autocapitalize="words">
+    </div>
+    <div class="filter-row">
+      <span id="ex-count" class="ex-count"></span>
     </div>
   </section>
+
+  <section id="exercise-library"></section>
+
+  <div id="ex-empty" class="card empty" hidden>
+    <p>Nothing matches that search.</p>
+  </div>
+
+  <p id="note" class="note">&nbsp;</p>
 </main>
 
+<script src="./js/exercises.js"></script>
 <script src="./js/app.js"></script>
 </body>
 </html>
