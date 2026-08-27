@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0e0e0e">
-<title>GET SWOLE</title>
+<title>Log a Set — GET SWOLE</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icons/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,35 +17,37 @@
 <nav>
   <a href="./" class="nav-brand">GET SWOLE</a>
   <div class="nav-links">
-    <a href="./" class="active">History</a>
-    <a href="./log.html">Log</a>
+    <a href="./">History</a>
+    <a href="./log.html" class="active">Log</a>
     <a href="./backup.html">Backup</a>
   </div>
 </nav>
 
 <main>
   <div class="page-header">
-    <h1>GET <span>SWOLE</span></h1>
-    <a href="./log.html" class="btn btn-primary">+ Log Set</a>
+    <h1>LOG A <span>SET</span></h1>
   </div>
 
-  <section id="history">
-    <h2>History</h2>
-    <div class="card">
-      <table class="sets-table">
-        <thead>
-          <tr>
-            <th>Exercise</th>
-            <th>Load</th>
-            <th>When</th>
-          </tr>
-        </thead>
-        <tbody id="history-body"></tbody>
-      </table>
-      <div id="history-empty" class="empty" hidden>
-        <p>No sets logged yet. Go lift something.</p>
+  <section id="log" class="card">
+    <div class="form-group">
+      <label for="exercise">Exercise</label>
+      <input id="exercise" placeholder="Bench Press" autocapitalize="words">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="weight">Weight</label>
+        <input id="weight" type="number" inputmode="decimal" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label for="reps">Reps</label>
+        <input id="reps" type="number" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label>&nbsp;</label>
+        <button id="add" class="btn btn-primary btn-block">Log Set</button>
       </div>
     </div>
+    <p id="note" class="note">&nbsp;</p>
   </section>
 </main>
 
