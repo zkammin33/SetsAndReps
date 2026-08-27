@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0e0e0e">
-<title>GET SWOLE</title>
+<title>Backup — GET SWOLE</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icons/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,35 +17,25 @@
 <nav>
   <a href="./" class="nav-brand">GET SWOLE</a>
   <div class="nav-links">
-    <a href="./" class="active">History</a>
+    <a href="./">History</a>
     <a href="./log.html">Log</a>
-    <a href="./backup.html">Backup</a>
+    <a href="./backup.html" class="active">Backup</a>
   </div>
 </nav>
 
 <main>
   <div class="page-header">
-    <h1>GET <span>SWOLE</span></h1>
-    <a href="./log.html" class="btn btn-primary">+ Log Set</a>
+    <h1><span>BACKUP</span></h1>
   </div>
 
-  <section id="history">
-    <h2>History</h2>
-    <div class="card">
-      <table class="sets-table">
-        <thead>
-          <tr>
-            <th>Exercise</th>
-            <th>Load</th>
-            <th>When</th>
-          </tr>
-        </thead>
-        <tbody id="history-body"></tbody>
-      </table>
-      <div id="history-empty" class="empty" hidden>
-        <p>No sets logged yet. Go lift something.</p>
-      </div>
+  <section id="backup" class="card">
+    <button id="export" class="btn btn-ghost">Export Backup</button>
+    <hr class="divider">
+    <div class="form-group">
+      <label for="import-file">Restore from a backup file</label>
+      <input id="import-file" type="file" accept=".json,application/json">
     </div>
+    <p id="note" class="note">&nbsp;</p>
   </section>
 </main>
 

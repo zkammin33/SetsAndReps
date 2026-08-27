@@ -1,7 +1,9 @@
-const CACHE = 'lift-v1';
+const CACHE = 'lift-v3';
 const FILES = [
   './',
   './index.html',
+  './log.html',
+  './backup.html',
   './manifest.json',
   './css/styles.css',
   './js/app.js',
