@@ -289,3 +289,276 @@ input[type="file"] { padding: 0.5rem; }
   border-top: 1px solid var(--border);
   margin: 1.5rem 0;
 }
+
+/* WORKOUT / SESSION CARDS */
+h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.workout-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.workout-actions { display: flex; gap: 0.4rem; flex-shrink: 0; }
+
+.workout-card .sets-table td { padding: 0.5rem 0; }
+.workout-card .sets-table td:last-child { text-align: right; white-space: nowrap; }
+
+.workout-start { margin-top: 1rem; }
+
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.btn-icon {
+  padding: 0.35rem 0.6rem;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.btn-danger { color: var(--danger); border-color: #4a2020; }
+.btn-danger:hover { border-color: var(--danger); color: var(--danger); }
+
+/* WORKOUT EDITOR */
+.exercise-row {
+  border-top: 1px solid var(--border);
+  padding: 0.75rem 0;
+}
+
+.exercise-row:first-child { border-top: none; padding-top: 0; }
+
+.exercise-row-main {
+  display: grid;
+  grid-template-columns: 1fr 5rem 6rem auto;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.editor-actions { display: flex; gap: 0.5rem; }
+
+/* SESSION EXERCISE CARDS */
+.target {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.ex-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.45;
+}
+
+/* SET ROWS — one per planned set */
+.set-head, .set-row {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr 1fr 4.5rem;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.set-head {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+
+.set-row { margin-bottom: 0.5rem; }
+.set-row:last-child { margin-bottom: 0; }
+
+.set-no {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.set-no small { color: var(--accent); font-size: 0.75em; }
+
+.set-row-done .set-no { color: var(--accent); }
+
+.set-done-load {
+  grid-column: span 2;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  background: var(--surface2);
+  border-left: 2px solid var(--accent);
+  border-radius: 3px;
+  padding: 0.5rem 0.7rem;
+}
+
+.set-check { color: var(--success); text-align: center; font-size: 1rem; }
+
+/* HISTORY WORKOUT TAG */
+.tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* SWAP */
+.ex-head-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.ex-note.swapped { color: var(--text); }
+.ex-note.swapped strong { color: var(--accent); font-weight: 500; }
+
+.btn-link {
+  background: none;
+  border: none;
+  padding: 0 0 0 0.4rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.btn-link:hover { color: var(--accent); }
+
+.swap-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 3px;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.swap-box .form-group:last-of-type { margin-bottom: 0.9rem; }
+
+/* MACHINE SETTINGS */
+.ex-settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.ex-settings-quiet { opacity: 0.45; }
+.ex-settings-quiet:hover { opacity: 1; }
+
+.setting-chip {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.25rem 0.55rem;
+}
+
+.setting-chip strong {
+  color: var(--accent);
+  font-weight: 700;
+  margin-left: 0.3rem;
+}
+
+.settings-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 3px;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.setting-row {
+  display: grid;
+  grid-template-columns: 1fr 6rem auto;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.settings-box .add-setting { margin-bottom: 0.9rem; }
+
+/* EXERCISE LIBRARY */
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ex-count {
+  margin-left: auto;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.group-heading {
+  margin: 1.5rem 0 0.75rem;
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.ex-row { cursor: pointer; margin-bottom: 0; }
+.ex-row h3 { transition: color 0.15s; }
+.ex-row:hover h3 { color: var(--accent); }
+
+.chevron {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  width: 1rem;
+  text-align: center;
+}
+
+.ex-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.9rem 0;
+}
+
+@media (max-width: 600px) {
+  .exercise-row-main { grid-template-columns: 1fr 1fr auto; }
+  .exercise-row-main .ex-name { grid-column: span 3; }
+
+  .workout-head { flex-wrap: wrap; gap: 0.5rem; }
+  .workout-start { width: 100%; }
+
+  .set-head, .set-row { grid-template-columns: 1.75rem 1fr 1fr 3.5rem; gap: 0.35rem; }
+  .setting-row { grid-template-columns: 1fr 4.5rem auto; gap: 0.35rem; }
+}
