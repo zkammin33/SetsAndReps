@@ -8,39 +8,37 @@ let workouts = JSON.parse(localStorage.getItem(WORKOUT_KEY) || 'null');
 const SEED_WORKOUTS = [
   {
     id: 'seed-push',
-    label: 'A — Push',
+    label: 'Push',
     exercises: [
-      { name: 'Smith Machine Incline Press', sets: 4, reps: '5–8', notes: 'Bench at 30°. Bar to upper chest, 3-second lowering, drive up explosively.' },
-      { name: 'Machine Chest Press', sets: 3, reps: '8–12', notes: "Handles aligned with mid-chest. Full stretch at the bottom, don't slam the stack." },
-      { name: 'Seated Dumbbell Shoulder Press', sets: 3, reps: '6–10', notes: 'Bench at 85–90°. At max DB weight, switch to 4-second negatives.' },
-      { name: 'Cable Lateral Raise', sets: 3, reps: '12–15', notes: 'Lowest pulley, lean slightly away. Lead with the elbow.' },
-      { name: 'Pec Deck Fly', sets: 2, reps: '12–15', notes: 'Squeeze 1 second at peak contraction. Pump finisher.' },
-      { name: 'Rope Triceps Pushdown', sets: 3, reps: '10–12', notes: 'Elbows pinned to your sides, spread the rope at the bottom.' },
-      { name: 'Overhead Cable Triceps Extension', sets: 2, reps: '12', notes: 'Face away from the stack, hinge slightly forward. Full stretch on the long head.' },
+      { name: 'Machine Chest Press', sets: 3, reps: '8–12' },
+      { name: 'Machine Shoulder Press', sets: 3, reps: '6–10' },
+      { name: 'Cable Lateral Raise', sets: 3, reps: '12–15' },
+      { name: 'Pec Deck Fly', sets: 2, reps: '12–15' },
+      { name: 'Rope Triceps Pushdown', sets: 3, reps: '10–12' },
+      { name: 'Overhead Cable Triceps Extension', sets: 2, reps: '12' },
     ],
   },
   {
     id: 'seed-pull',
-    label: 'B — Pull',
+    label: 'Pull',
     exercises: [
-      { name: 'Lat Pulldown', sets: 4, reps: '6–10', notes: 'Slightly wider than shoulder grip, pull to upper chest. Stack maxed? Add a 2-second pause.' },
-      { name: 'Chest-Supported Row Machine', sets: 3, reps: '8–12', notes: 'Chest glued to the pad. Drive elbows back, squeeze shoulder blades.' },
-      { name: 'Single-Arm Cable Row', sets: 3, reps: '10–12 / side', notes: 'Full stretch forward, then row to the hip.' },
-      { name: 'Reverse Pec Deck (Rear Delts)', sets: 3, reps: '15', notes: 'Palms down or neutral. High reps, no swinging.' },
-      { name: 'Cable Curl (Straight or EZ Bar)', sets: 3, reps: '8–12', notes: 'Elbows slightly in front of the body, full range.' },
-      { name: 'Dumbbell Hammer Curl', sets: 2, reps: '10–12', notes: 'Neutral grip, controlled. Builds brachialis and grip.' },
+      { name: 'Lat Pulldown', sets: 4, reps: '6–10' },
+      { name: 'Chest-Supported Row Machine', sets: 3, reps: '8–12' },
+      { name: 'Face Pull', sets: 3, reps: '10-12' },
+      { name: 'Reverse Pec Deck (Rear Delts)', sets: 3, reps: '15' },
+      { name: 'Cable Curl (Straight or EZ Bar)', sets: 3, reps: '8–12' },
+      { name: 'Dumbbell Hammer Curl', sets: 2, reps: '10–12' },
     ],
   },
   {
     id: 'seed-legs',
-    label: 'C — Legs',
+    label: 'Legs',
     exercises: [
-      { name: 'Smith Machine Squat', sets: 4, reps: '5–8', notes: 'Feet slightly forward of the bar path. Control the descent to just below parallel.' },
-      { name: 'Leg Press', sets: 3, reps: '8–12', notes: 'Feet mid-platform, shoulder width. Stack maxed? 2-second pause at the bottom.' },
-      { name: 'Smith Machine or DB Romanian Deadlift', sets: 3, reps: '8–10', notes: 'Soft knees, hips back, 3–4 second lowering. Bar stays close to your legs.' },
-      { name: 'Leg Extension', sets: 3, reps: '12–15', notes: '1-second squeeze at the top. Toes slightly out hits the inner quad.' },
-      { name: 'Lying or Seated Leg Curl', sets: 3, reps: '10–12', notes: "Slow eccentric. Don't let the pad crash back down." },
-      { name: 'Calf Raise on Leg Press', sets: 4, reps: '12–15', notes: 'Full stretch at the bottom with a 2-second pause. No bouncing.' },
+      { name: 'Smith Machine Squat', sets: 4, reps: '5–8' },
+      { name: 'Leg Press', sets: 3, reps: '8–12' },
+      { name: 'Leg Extension', sets: 3, reps: '12–15' },
+      { name: 'Seated Leg Curl', sets: 3, reps: '10–12' },
+      { name: 'Calf Raise (Leg Press)', sets: 4, reps: '12–15' },
     ],
   },
 ];
@@ -104,6 +102,15 @@ const saveSettings = () => localStorage.setItem(SETTINGS_KEY, JSON.stringify(exS
 const isMachine = name =>
   /machine|cable|smith|pulldown|pushdown|pec deck|deck|leg press|leg extension|leg curl|seated row|hack squat|crossover|chest press|leg raise/i
     .test(String(name));
+
+/* Execution/setup cue for a known exercise, from the catalog in exercises.js.
+   Workout-specific exercises can still carry their own hand-typed notes;
+   this is only the fallback default. */
+const catalogNotes = name => {
+  const catalog = typeof EXERCISE_CATALOG === 'undefined' ? [] : EXERCISE_CATALOG;
+  const hit = catalog.find(e => settingsKey(e.name) === settingsKey(name));
+  return (hit && hit.notes) || '';
+};
 
 /* Chips summarising an exercise's saved settings, with an edit affordance.
    `hook` is the data-settings attribute value the click handler reads back. */
@@ -297,13 +304,16 @@ if (workoutList) {
         </div>
         <table class="sets-table">
           <tbody>
-            ${w.exercises.map(ex => `<tr>
-              <td>
-                <strong>${esc(ex.name)}</strong>
-                ${ex.notes ? `<br><span class="set-when">${esc(ex.notes)}</span>` : ''}
-              </td>
-              <td class="set-load">${esc(ex.sets || '')} &times; ${esc(ex.reps || '')}</td>
-            </tr>`).join('')}
+            ${w.exercises.map(ex => {
+              const noteText = ex.notes || catalogNotes(ex.name);
+              return `<tr>
+                <td>
+                  <strong>${esc(ex.name)}</strong>
+                  ${noteText ? `<br><span class="set-when">${esc(noteText)}</span>` : ''}
+                </td>
+                <td class="set-load">${esc(ex.sets || '')} &times; ${esc(ex.reps || '')}</td>
+              </tr>`;
+            }).join('')}
           </tbody>
         </table>
         <a class="btn btn-primary btn-sm workout-start" href="./log.html?w=${encodeURIComponent(w.id)}">Start This Workout</a>
@@ -393,8 +403,9 @@ if (workoutSelect) {
       // A swap keeps the slot's prescription and replaces only the movement.
       const swappedFrom = swaps[slotKey(w.id, i)] ? slot.name : null;
       const ex = swappedFrom
-        ? { name: swaps[slotKey(w.id, i)], sets: slot.sets, reps: slot.reps, notes: '' }
+        ? { name: swaps[slotKey(w.id, i)], sets: slot.sets, reps: slot.reps }
         : slot;
+      const noteText = ex.notes || catalogNotes(ex.name);
 
       const done = todaysSets(ex.name, w.label);
       const prev = lastLoad(ex.name);
@@ -446,7 +457,8 @@ if (workoutSelect) {
                  Swapped in for <strong>${esc(swappedFrom)}</strong>
                  <button class="btn-link" data-revert="${i}">Undo</button>
                </p>`
-            : ex.notes ? `<p class="ex-note">${esc(ex.notes)}</p>` : ''}
+            : ''}
+          ${noteText ? `<p class="ex-note">${esc(noteText)}</p>` : ''}
           <div class="swap-slot" data-swap-slot="${i}"></div>
           ${settingsChipsHTML(ex.name, i)}
           <div class="settings-slot" data-settings-slot="${i}"></div>
@@ -623,7 +635,10 @@ if (exerciseLibrary) {
         <h2 class="group-heading">${esc(g)}</h2>
         ${items.map(e => {
           const open = e.name === openName;
-          const notes = [...new Set(e.slots.map(s => s.notes).filter(Boolean))];
+          // The catalog default, plus any per-workout notes that override it.
+          const notes = [...new Set(
+            [catalogNotes(e.name), ...e.slots.map(s => s.notes)].filter(Boolean)
+          )];
           return `
             <div class="card exercise-card">
               <div class="workout-head ex-row" data-toggle="${esc(e.name)}">
